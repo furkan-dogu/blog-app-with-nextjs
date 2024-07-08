@@ -17,13 +17,16 @@ import LOGO from "@/public/blog-app.jpg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { pages, settings } from "@/helpers/navbarLinks";
+import { useSelector } from "react-redux";
+import useAuthCalls from "@/hooks/useAuthCalls";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
   const router = useRouter();
-  const user = false;
-  const image = ""
+  const { user, image } = useSelector(state => state.auth)
+  const { logout } = useAuthCalls()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -139,7 +142,7 @@ function Navbar() {
                       router.push(setting.link);
                     }}
                   >
-                    <Typography textAlign="center">{setting.title}</Typography>
+                    <Typography textAlign="center" onClick={() => setting.title === "Logout" && logout()}>{setting.title}</Typography>
                   </MenuItem>
                 ))
               ) : (

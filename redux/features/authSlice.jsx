@@ -4,7 +4,8 @@ const initialState = {
     loading: false,
     error: false,
     user: "",
-    token: ""
+    token: "",
+    image: ""
 }
 
 const authSlice = createSlice({
@@ -23,12 +24,14 @@ const authSlice = createSlice({
             state.loading = false
             state.error = false
             state.user = payload.user.username
+            state.image = payload.user.image
             state.token = payload.token
         },
         registerSuccess: (state, { payload }) => {
             state.loading = false
             state.error = false
             state.user = payload.data.username
+            state.image = payload.data.image
             state.token = payload.token
         },
         logoutSuccess: (state) => {
@@ -36,6 +39,7 @@ const authSlice = createSlice({
             state.error = false
             state.user = ""
             state.token = ""
+            state.image = ""
         }
     }
 })
