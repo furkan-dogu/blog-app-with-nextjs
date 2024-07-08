@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { CssBaseline } from "@mui/material";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+import { Providers } from "@/redux/provider"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,13 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/furkan-logo.jpg" sizes="any" />
       </head>
       <body className={inter.className}>
-        <CssBaseline />
-        <Navbar />
-        {children}
-        <Footer />
-        <ToastContainer />
+        <Providers>
+          <CssBaseline />
+          <Navbar />
+          {children}
+          <Footer />
+          <ToastContainer />
+        </Providers>
       </body>
     </html>
   );
