@@ -44,8 +44,8 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{ backgroundColor: "#0C0C0C" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#0C0C0C" }}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <Image src={LOGO} alt="LOGO" width={120} height={70} />
