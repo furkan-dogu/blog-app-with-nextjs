@@ -10,7 +10,7 @@ import { Form } from "formik";
 import { object, string } from "yup";
 import { useRouter } from "next/navigation";
 
-export const loginSchema = object({
+export const registerSchema = object({
   email: string()
     .email("Please enter a valid e-mail.")
     .required("E-mail entry is mandatory."),
@@ -28,15 +28,68 @@ export const loginSchema = object({
       /[@$!%*?&]+/,
       "The password must contain at least one special character (@$!%*?&)."
     ),
+  username: string().required("Username entry is mandatory."),
+  firstName: string().required("First name entry is mandatory."),
+  lastName: string().required("Last name entry is mandatory."),
+  image: string().required("Image entry is mandatory."),
+  bio: string().required("Bio entry is mandatory."),
 });
 
-const LoginForm = ({ handleChange, values, touched, errors, handleBlur }) => {
+const RegisterForm = ({
+  handleChange,
+  values,
+  touched,
+  errors,
+  handleBlur,
+}) => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Form>
       <Box noValidate sx={{ mt: 1 }}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
+          name="username"
+          type="text"
+          value={values.username}
+          onChange={handleChange}
+          error={touched.username && Boolean(errors.username)}
+          helperText={errors.username}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="firstName"
+          label="First Name"
+          name="firstName"
+          type="text"
+          value={values.firstName}
+          onChange={handleChange}
+          error={touched.firstName && Boolean(errors.firstName)}
+          helperText={errors.firstName}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="lastName"
+          label="Last Name"
+          name="lastName"
+          type="text"
+          value={values.lastName}
+          onChange={handleChange}
+          error={touched.lastName && Boolean(errors.lastName)}
+          helperText={errors.lastName}
+          onBlur={handleBlur}
+        />
         <TextField
           margin="normal"
           required
@@ -49,6 +102,34 @@ const LoginForm = ({ handleChange, values, touched, errors, handleBlur }) => {
           onChange={handleChange}
           error={touched.email && Boolean(errors.email)}
           helperText={errors.email}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="image"
+          label="Image"
+          name="image"
+          type="url"
+          value={values.image}
+          onChange={handleChange}
+          error={touched.image && Boolean(errors.image)}
+          helperText={errors.image}
+          onBlur={handleBlur}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="bio"
+          label="Bio"
+          name="bio"
+          type="text"
+          value={values.bio}
+          onChange={handleChange}
+          error={touched.bio && Boolean(errors.bio)}
+          helperText={errors.bio}
           onBlur={handleBlur}
         />
         <TextField
@@ -89,16 +170,16 @@ const LoginForm = ({ handleChange, values, touched, errors, handleBlur }) => {
             "&:hover": { backgroundColor: "#2F2F2F" },
           }}
         >
-          Sign In
+          Sign Up
         </Button>
         <Stack direction={"row"} gap={"5px"} justifyContent={"center"}>
-          <Typography variant="body2">Don't have an account?</Typography>
+          <Typography variant="body2">Already have an account?</Typography>
           <Typography
             variant="body2"
             sx={{ color: "red", cursor: "pointer" }}
-            onClick={() => router.push("/register")}
+            onClick={() => router.push("/login")}
           >
-            Sign Up
+            Sign In
           </Typography>
         </Stack>
       </Box>
@@ -106,4 +187,4 @@ const LoginForm = ({ handleChange, values, touched, errors, handleBlur }) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

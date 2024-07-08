@@ -31,7 +31,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Sign In
             </Typography>
             <Formik
               initialValues={{ email: "", password: "" }}
