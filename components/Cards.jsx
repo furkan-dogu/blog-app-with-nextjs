@@ -10,10 +10,16 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useBlogCalls from "@/hooks/useBlogCalls";
+import { useSelector } from "react-redux";
 
 export default function Cards({ blog }) {
-  const router = useRouter()
-  const { postLike } = useBlogCalls()
+  const router = useRouter();
+  const { postLike } = useBlogCalls();
+  const { personalId } = useSelector((state) => state.auth);
+
+  const LikeStyle = blog?.likes?.includes(personalId)
+    ? { color: "red" }
+    : { color: "inherit" };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -53,7 +59,7 @@ export default function Cards({ blog }) {
       <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>
           <IconButton onClick={() => postLike(blog)}>
-            <FavoriteIcon />
+            <FavoriteIcon sx={LikeStyle} />
             <Typography>{blog?.likes.length}</Typography>
           </IconButton>
           <IconButton>
