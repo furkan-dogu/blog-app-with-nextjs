@@ -32,4 +32,4 @@ export const settings = [
         title: "Logout",
         link: "/"
     }
-  ]
+]

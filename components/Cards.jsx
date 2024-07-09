@@ -4,12 +4,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import CommentIcon from "@mui/icons-material/Comment";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, IconButton } from "@mui/material";
+import { useRouter } from "next/navigation";
+import useBlogCalls from "@/hooks/useBlogCalls";
 
 export default function Cards({ blog }) {
+  const router = useRouter()
+  const { postLike } = useBlogCalls()
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -45,9 +50,9 @@ export default function Cards({ blog }) {
           {blog?.content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{justifyContent: "space-between"}}>
+      <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>
-          <IconButton>
+          <IconButton onClick={() => postLike(blog)}>
             <FavoriteIcon />
             <Typography>{blog?.likes.length}</Typography>
           </IconButton>
@@ -60,7 +65,18 @@ export default function Cards({ blog }) {
             <Typography>{blog?.countOfVisitors}</Typography>
           </IconButton>
         </Box>
-        <Button variant="contained" sx={{color: "turquoise", backgroundColor: "#0C0C0C", fontSize: 12, "&:hover": {opacity: 0.9}}}>Read More</Button>
+        <Button
+          variant="contained"
+          sx={{
+            color: "turquoise",
+            backgroundColor: "#0C0C0C",
+            fontSize: 12,
+            "&:hover": { opacity: 0.9 },
+          }}
+          onClick={() => router.push(`/detail/${blog?._id}`)}
+        >
+          Read More
+        </Button>
       </CardActions>
     </Card>
   );

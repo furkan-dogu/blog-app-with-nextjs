@@ -25,7 +25,7 @@ export default function Home() {
       minHeight={"calc(90vh - 70px)"}
     >
       {blogs.map((blog) => (
-        <Cards key={blog.id} blog={blog} />
+        <Cards key={blog._id} blog={blog} />
       ))}
     </Stack>
   );
