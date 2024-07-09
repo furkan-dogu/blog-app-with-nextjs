@@ -42,7 +42,37 @@ const useBlogCalls = () => {
         }
     }
 
-    return { getBlogs, getSingleBlog, postLike }
+    const postComment = async (info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.post("/comments", info)
+            getSingleBlog(info.blogId)
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Comment işlemi başarısız")
+        }
+    }
+
+    const deleteComment = async (info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.delete(`/comments/${info._id}`)
+            getSingleBlog(info.blogId)
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Comment silme işlemi başarısız")
+        }
+    }
+
+    return { 
+        getBlogs, 
+        getSingleBlog, 
+        postLike, 
+        postComment,
+        deleteComment 
+    }
 }
 
 export default useBlogCalls

@@ -12,17 +12,34 @@ import FormatItalic from '@mui/icons-material/FormatItalic';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
 import { useState } from 'react';
+import useBlogCalls from '@/hooks/useBlogCalls';
 
-export default function CommentBox() {
+export default function CommentBox({ info, setInfo }) {
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
+  const { postComment } = useBlogCalls()
+
+  const handleChange = (e) => {
+    setInfo({...info, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setInfo(info)
+    postComment(info)
+    setInfo({...info, comment: ""})
+  }
+
   return (
-    <FormControl>
+    <FormControl component={"form"} onSubmit={handleSubmit}>
       <FormLabel>Your comment</FormLabel>
       <Textarea
         placeholder="Type something here…"
         minRows={4}
+        name="comment"
+        value={info.comment}
+        onChange={handleChange}
         endDecorator={
           <Box
             sx={{
@@ -75,7 +92,7 @@ export default function CommentBox() {
             >
               <FormatItalic />
             </IconButton>
-            <Button sx={{ ml: 'auto' }}>Send</Button>
+            <Button sx={{ ml: 'auto' }} type='submit'>Send</Button>
           </Box>
         }
         sx={{

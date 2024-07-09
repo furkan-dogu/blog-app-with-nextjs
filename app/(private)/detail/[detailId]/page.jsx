@@ -26,6 +26,11 @@ const BlogDetail = ({ params }) => {
   const { singleBlog, loading } = useSelector((state) => state.blog);
   const { personalId } = useSelector((state) => state.auth);
   const [commentArea, setCommentArea] = useState(false)
+  const [info, setInfo] = useState({
+    userId: personalId,
+    blogId: detailId,
+    comment: ""
+  })
 
   useEffect(() => {
     getSingleBlog(detailId);
@@ -36,7 +41,6 @@ const BlogDetail = ({ params }) => {
     content,
     countOfVisitors,
     createdAt,
-    updatedAt,
     image,
     likes,
     title,
@@ -104,7 +108,7 @@ const BlogDetail = ({ params }) => {
           </CardActions>
           {commentArea && (
             <>
-              <CommentBox />
+              <CommentBox info={info} setInfo={setInfo} />
               {comments.map((item, index) => (
                 <Box key={index} mt={1}>
                   <CommentCards  item={item} />
