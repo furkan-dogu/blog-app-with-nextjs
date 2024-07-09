@@ -111,7 +111,7 @@ const BlogDetail = ({ params }) => {
               <CommentBox info={info} setInfo={setInfo} />
               {comments.map((item, index) => (
                 <Box key={index} mt={1}>
-                  <CommentCards  item={item} />
+                  <CommentCards item={item} setInfo={setInfo} />
                 </Box>
               ))}
             </>

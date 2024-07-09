@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import { useSelector } from "react-redux";
 import useBlogCalls from "@/hooks/useBlogCalls";
 
-export default function CommentCards({ item }) {
+export default function CommentCards({ item, setInfo }) {
   const { personalId } = useSelector((state) => state.auth);
   const { comment, createdAt, userId } = item;
   const { deleteComment } = useBlogCalls();
@@ -33,19 +33,26 @@ export default function CommentCards({ item }) {
         </Typography>
       </CardContent>
       {userId?._id === personalId && (
-        <CardActions>
-          <Button size="small" variant="contained" color="success">
-            Edit
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="error"
-            onClick={() => deleteComment(item)}
-          >
-            Delete
-          </Button>
-        </CardActions>
+        <Box pl={2}>
+          <CardActions>
+            <Button
+              size="small"
+              variant="contained"
+              color="success"
+              onClick={() => setInfo(item)}
+            >
+              Edit
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              color="error"
+              onClick={() => deleteComment(item)}
+            >
+              Delete
+            </Button>
+          </CardActions>
+        </Box>
       )}
     </Card>
   );

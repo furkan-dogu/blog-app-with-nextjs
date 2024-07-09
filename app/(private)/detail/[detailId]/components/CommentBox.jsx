@@ -18,7 +18,7 @@ export default function CommentBox({ info, setInfo }) {
   const [italic, setItalic] = useState(false);
   const [fontWeight, setFontWeight] = useState('normal');
   const [anchorEl, setAnchorEl] = useState(null);
-  const { postComment } = useBlogCalls()
+  const { postComment, updateComment } = useBlogCalls()
 
   const handleChange = (e) => {
     setInfo({...info, [e.target.name]: e.target.value})
@@ -27,7 +27,11 @@ export default function CommentBox({ info, setInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     setInfo(info)
-    postComment(info)
+    if(info._id) {
+      updateComment(info)
+    } else {
+      postComment(info)
+    }
     setInfo({...info, comment: ""})
   }
 

@@ -66,12 +66,25 @@ const useBlogCalls = () => {
         }
     }
 
+    const updateComment = async (info) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.put(`/comments/${info._id}`, info)
+            getSingleBlog(info.blogId)
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Comment edit işlemi başarısız")
+        }
+    }
+
     return { 
         getBlogs, 
         getSingleBlog, 
         postLike, 
         postComment,
-        deleteComment 
+        deleteComment,
+        updateComment 
     }
 }
 
