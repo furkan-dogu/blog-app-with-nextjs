@@ -11,6 +11,7 @@ import { Box, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useBlogCalls from "@/hooks/useBlogCalls";
 import { useSelector } from "react-redux";
+import { toastErrorNotify } from "@/helpers/ToastNotify";
 
 export default function Cards({ blog }) {
   const router = useRouter();
@@ -20,6 +21,14 @@ export default function Cards({ blog }) {
   const LikeStyle = blog?.likes?.includes(personalId)
     ? { color: "red" }
     : { color: "inherit" };
+
+  const handleLike = () => {
+    if (!personalId) {
+      toastErrorNotify("You must login to perform this operation.");
+      return;
+    }
+    postLike(blog);
+  };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -58,7 +67,7 @@ export default function Cards({ blog }) {
       </CardContent>
       <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
         <Box>
-          <IconButton onClick={() => postLike(blog)}>
+          <IconButton onClick={handleLike}>
             <FavoriteIcon sx={LikeStyle} />
             <Typography>{blog?.likes.length}</Typography>
           </IconButton>
@@ -77,7 +86,7 @@ export default function Cards({ blog }) {
             color: "turquoise",
             backgroundColor: "#0C0C0C",
             fontSize: 12,
-            "&:hover": { opacity: 0.9 },
+            "&:hover": { backgroundColor: "#0C0C0C", opacity: 0.95 },
           }}
           onClick={() => router.push(`/detail/${blog?._id}`)}
         >

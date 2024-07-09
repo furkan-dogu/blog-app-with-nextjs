@@ -34,6 +34,7 @@ const useBlogCalls = () => {
         try {
             await axiosWithToken.post(`/blogs/${info._id}/postLike`)
             getBlogs()
+            getSingleBlog(info._id)
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
