@@ -25,12 +25,12 @@ const BlogDetail = ({ params }) => {
   const { getSingleBlog, postLike } = useBlogCalls();
   const { singleBlog, loading } = useSelector((state) => state.blog);
   const { personalId } = useSelector((state) => state.auth);
-  const [commentArea, setCommentArea] = useState(false)
+  const [commentArea, setCommentArea] = useState(false);
   const [info, setInfo] = useState({
     userId: personalId,
     blogId: detailId,
-    comment: ""
-  })
+    comment: "",
+  });
 
   useEffect(() => {
     getSingleBlog(detailId);
@@ -109,13 +109,13 @@ const BlogDetail = ({ params }) => {
           {commentArea && (
             <>
               <CommentBox info={info} setInfo={setInfo} />
-              {comments.map((item, index) => (
-                <Box key={index} mt={1}>
-                  <CommentCards item={item} setInfo={setInfo} />
+              {comments.map((item) => (
+                <Box key={item._id} mt={1}>
+                  <CommentCards item={item} info={info} setInfo={setInfo} />
                 </Box>
               ))}
             </>
-            )}
+          )}
         </Box>
       </Stack>
     );

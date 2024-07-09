@@ -25,14 +25,16 @@ export default function CommentBox({ info, setInfo }) {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setInfo(info)
-    if(info._id) {
+    e.preventDefault();
+    setInfo(info);
+    if (info._id) {
       updateComment(info)
     } else {
-      postComment(info)
+      const newInfo = { ...info }
+      delete newInfo._id
+      postComment(newInfo)
     }
-    setInfo({...info, comment: ""})
+    setInfo({ ...info, comment: "", _id: "" })
   }
 
   return (
