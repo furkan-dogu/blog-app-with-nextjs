@@ -7,10 +7,10 @@ const useBlogCalls = () => {
     const dispatch = useDispatch()
     const { axiosPublic, axiosWithToken } = useAxios()
     
-    const getBlogs = async () => {
+    const getBlogs = async (page) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosPublic.get("/blogs")
+            const { data } = await axiosPublic.get(`/blogs?limit=3&page=${page}`)
             dispatch(getBlogsSuccess(data))
         } catch (error) {
             console.log(error)
@@ -29,12 +29,11 @@ const useBlogCalls = () => {
         }
     }
 
-    const postLike = async (info) => {
+    const postLike = async (info, page) => {
         dispatch(fetchStart())
         try {
             await axiosWithToken.post(`/blogs/${info._id}/postLike`)
-            getBlogs()
-            getSingleBlog(info._id)
+            page ? getBlogs(page) : getSingleBlog(info._id)
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())

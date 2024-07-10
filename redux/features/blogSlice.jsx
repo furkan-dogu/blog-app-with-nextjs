@@ -4,7 +4,9 @@ const initialState = {
     loading: false,
     error: false,
     blogs: [],
-    singleBlog: []
+    singleBlog: [],
+    current: null,
+    totalPages: null
 }
 
 const blogSlice = createSlice({
@@ -23,6 +25,8 @@ const blogSlice = createSlice({
             state.loading = false
             state.error = false
             state.blogs = payload.data
+            state.current = payload.details.pages.current
+            state.totalPages = payload.details.pages.total
         },
         getSingleBlogSuccess: (state, {payload}) => {
             state.loading = false

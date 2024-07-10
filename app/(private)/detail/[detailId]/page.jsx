@@ -61,11 +61,11 @@ const BlogDetail = ({ params }) => {
         alignItems={"center"}
         py={3}
       >
-        <Box maxWidth={900} width={"90%"}>
+        <Box maxWidth={1000} width={"90%"}>
           <CardMedia
             component="img"
             alt={title}
-            sx={{ maxHeight: 400, objectFit: "contain", pt: 1 }}
+            sx={{ maxHeight: 500, objectFit: "contain", pt: 1 }}
             image={image}
           />
           <CardHeader

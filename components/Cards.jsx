@@ -17,6 +17,7 @@ export default function Cards({ blog }) {
   const router = useRouter();
   const { postLike } = useBlogCalls();
   const { personalId } = useSelector((state) => state.auth);
+  const { current } = useSelector((state) => state.blog);
 
   const LikeStyle = blog?.likes?.includes(personalId)
     ? { color: "red" }
@@ -27,11 +28,11 @@ export default function Cards({ blog }) {
       toastErrorNotify("You must login to perform this operation.");
       return;
     }
-    postLike(blog);
+    postLike(blog, current);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, backgroundColor:"#FFFEF9" }}>
       <CardMedia
         component="img"
         alt={blog?.title}
