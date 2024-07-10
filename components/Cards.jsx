@@ -32,7 +32,7 @@ export default function Cards({ blog }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor:"#FFFEF9" }}>
+    <Card sx={{ width: 345, backgroundColor:"#FFFEF9" }}>
       <CardMedia
         component="img"
         alt={blog?.title}
@@ -61,6 +61,7 @@ export default function Cards({ blog }) {
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 3,
+            height: 60
           }}
         >
           {blog?.content}

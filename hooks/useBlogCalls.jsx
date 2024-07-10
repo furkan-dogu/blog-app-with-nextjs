@@ -1,7 +1,13 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { toastErrorNotify } from "@/helpers/ToastNotify"
-import { fetchFail, fetchStart, getBlogsSuccess, getSingleBlogSuccess } from "@/redux/features/blogSlice"
+import { 
+    fetchFail, 
+    fetchStart, 
+    getBlogsSuccess, 
+    getSingleBlogSuccess,
+    getCategoriesSuccess
+} from "@/redux/features/blogSlice"
 
 const useBlogCalls = () => {
     const dispatch = useDispatch()
@@ -77,13 +83,38 @@ const useBlogCalls = () => {
         }
     }
 
+    const postBlog = async (info, page) => {
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.post("/blogs", info)
+            getBlogs(page)
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Blog oluşturma işlemi başarısız")
+        }
+    }
+
+    const getCategories = async () => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get("/categories")
+            dispatch(getCategoriesSuccess(data))
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+        }
+    }
+
     return { 
         getBlogs, 
         getSingleBlog, 
         postLike, 
         postComment,
         deleteComment,
-        updateComment 
+        updateComment,
+        postBlog,
+        getCategories 
     }
 }
 
