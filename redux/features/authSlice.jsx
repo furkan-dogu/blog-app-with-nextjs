@@ -7,6 +7,8 @@ const initialState = {
   token: "",
   image: "",
   personalId: "",
+  email: "",
+  bio: "",
 };
 
 const authSlice = createSlice({
@@ -28,6 +30,8 @@ const authSlice = createSlice({
       state.image = payload.user.image;
       state.token = payload.token;
       state.personalId = payload.user._id;
+      state.email = payload.user.email;
+      state.bio = payload.user.bio;
     },
     registerSuccess: (state, { payload }) => {
       state.loading = false;
@@ -36,6 +40,8 @@ const authSlice = createSlice({
       state.image = payload.data.image;
       state.token = payload.token;
       state.personalId = payload.data._id;
+      state.email = payload.data.email;
+      state.bio = payload.data.bio;
     },
     logoutSuccess: (state) => {
       state.loading = false;
@@ -44,6 +50,8 @@ const authSlice = createSlice({
       state.token = "";
       state.image = "";
       state.personalId = "";
+      state.email = "";
+      state.bio = "";
     },
   },
 });
