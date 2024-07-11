@@ -6,7 +6,8 @@ import {
     fetchStart, 
     getBlogsSuccess, 
     getSingleBlogSuccess,
-    getCategoriesSuccess
+    getCategoriesSuccess,
+    getMyBlogsSuccess
 } from "@/redux/features/blogSlice"
 
 const useBlogCalls = () => {
@@ -106,6 +107,18 @@ const useBlogCalls = () => {
         }
     }
 
+    const getMyBlogs = async (userId) => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get(`/blogs?author=${userId}`)
+            dispatch(getMyBlogsSuccess(data))
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("My Blogs işlemi başarısız")
+        }
+    }
+
     return { 
         getBlogs, 
         getSingleBlog, 
@@ -114,7 +127,8 @@ const useBlogCalls = () => {
         deleteComment,
         updateComment,
         postBlog,
-        getCategories 
+        getCategories,
+        getMyBlogs 
     }
 }
 
