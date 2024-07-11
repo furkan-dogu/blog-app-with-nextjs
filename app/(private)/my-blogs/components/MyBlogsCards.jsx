@@ -4,11 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function MyBlogsCards({ item }) {
-  const router = useRouter()
-  
   return (
     <Card sx={{ maxWidth: 345, width: "90%" }}>
       <CardMedia
@@ -39,7 +37,7 @@ export default function MyBlogsCards({ item }) {
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 4,
-            height: 82
+            height: 82,
           }}
         >
           {item?.content}
@@ -50,18 +48,24 @@ export default function MyBlogsCards({ item }) {
         </Typography>
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          variant="contained"
-          sx={{
-            color: "turquoise",
-            backgroundColor: "#0C0C0C",
-            fontSize: 12,
-            "&:hover": { backgroundColor: "#0C0C0C", opacity: 0.95 },
+        <Link
+          href={{
+            pathname: `/detail/${item?._id}`,
+            query: { name: "myblogs" },
           }}
-          onClick={() => router.push(`/detail/${item?._id}`)}
         >
-          Read More
-        </Button>
+          <Button
+            variant="contained"
+            sx={{
+              color: "turquoise",
+              backgroundColor: "#0C0C0C",
+              fontSize: 12,
+              "&:hover": { backgroundColor: "#0C0C0C", opacity: 0.95 },
+            }}
+          >
+            Read More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
