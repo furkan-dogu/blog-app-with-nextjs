@@ -21,6 +21,8 @@ import Loading from "@/app/loading";
 import CommentCards from "./components/CommentCards";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@mui/material";
+import DeleteModal from "../../my-blogs/components/DeleteModal";
+import UpdateModal from "../../my-blogs/components/UpdateModal";
 
 const BlogDetail = ({ params }) => {
   const { detailId } = params;
@@ -41,7 +43,10 @@ const BlogDetail = ({ params }) => {
     getSingleBlog(detailId);
   }, []);
 
+  console.log(singleBlog);
+
   const {
+    _id,
     comments,
     content,
     countOfVisitors,
@@ -55,6 +60,10 @@ const BlogDetail = ({ params }) => {
   const LikeStyle = likes?.includes(personalId)
     ? { color: "red" }
     : { color: "inherit" };
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const handleDeleteOpen = () => setDeleteOpen(true);
+  const handleDeleteClose = () => setDeleteOpen(false);
 
   if (loading) {
     return <Loading />;
@@ -122,14 +131,18 @@ const BlogDetail = ({ params }) => {
             </>
           )}
           {fromParam === "myBlogs" && userId?._id === personalId && (
-            <CardActions sx={{ justifyContent: "center", gap: 4 }}>
-              <Button variant="contained" color="success">
-                Update
-              </Button>
-              <Button variant="contained" color="error">
-                Delete
-              </Button>
-            </CardActions>
+            <>
+              <CardActions sx={{ justifyContent: "center", gap: 4 }}>
+                <Button variant="contained" color="success">
+                  Update
+                </Button>
+                <Button variant="contained" color="error" onClick={handleDeleteOpen}>
+                  Delete
+                </Button>
+              </CardActions>
+              <DeleteModal open={deleteOpen} handleClose={handleDeleteClose} id={_id} />
+              <UpdateModal />
+            </>
           )}
         </Box>
       </Stack>

@@ -9,10 +9,12 @@ import {
     getCategoriesSuccess,
     getMyBlogsSuccess
 } from "@/redux/features/blogSlice"
+import { useRouter } from "next/navigation"
 
 const useBlogCalls = () => {
     const dispatch = useDispatch()
     const { axiosPublic, axiosWithToken } = useAxios()
+    const router = useRouter()
     
     const getBlogs = async (page) => {
         dispatch(fetchStart())
@@ -119,6 +121,29 @@ const useBlogCalls = () => {
         }
     }
 
+    const deleteBlog = async (id) => {
+        dispatch(fetchFail())
+        try {
+            await axiosWithToken.delete(`/blogs/${id}`)	
+            router.push("/my-blogs")
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Blog silme işlemi başarısız")
+        }
+    }
+
+    const updateBlog = async (info) => {
+        dispatch(fetchFail())
+        try {
+            await axiosWithToken.put(`/blogs/${info._id}`, info)
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+            toastErrorNotify("Blog edit işlemi başarısız")
+        }
+    }
+
     return { 
         getBlogs, 
         getSingleBlog, 
@@ -128,7 +153,9 @@ const useBlogCalls = () => {
         updateComment,
         postBlog,
         getCategories,
-        getMyBlogs 
+        getMyBlogs,
+        deleteBlog,
+        updateBlog 
     }
 }
 
