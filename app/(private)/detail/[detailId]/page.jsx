@@ -26,7 +26,7 @@ import UpdateModal from "../../my-blogs/components/UpdateModal";
 
 const BlogDetail = ({ params }) => {
   const { detailId } = params;
-  const { getSingleBlog, postLike } = useBlogCalls();
+  const { getSingleBlog, postLike, getCategories } = useBlogCalls();
   const { singleBlog, loading } = useSelector((state) => state.blog);
   const { personalId } = useSelector((state) => state.auth);
   const [commentArea, setCommentArea] = useState(false);
@@ -41,9 +41,8 @@ const BlogDetail = ({ params }) => {
 
   useEffect(() => {
     getSingleBlog(detailId);
+    fromParam === "myBlogs" && getCategories();
   }, []);
-
-  console.log(singleBlog);
 
   const {
     _id,
@@ -61,9 +60,34 @@ const BlogDetail = ({ params }) => {
     ? { color: "red" }
     : { color: "inherit" };
 
+  const [data, setData] = useState({
+    _id: "",
+    userId: "",
+    categoryId: "",
+    title: "",
+    content: "",
+    image: "",
+    isPublish: "",
+  });
+
   const [deleteOpen, setDeleteOpen] = useState(false);
   const handleDeleteOpen = () => setDeleteOpen(true);
   const handleDeleteClose = () => setDeleteOpen(false);
+
+  const [updateOpen, setUpdateOpen] = useState(false);
+  const handleUpdateOpen = () => {
+    setUpdateOpen(true);
+    setData({
+      _id: singleBlog?._id,
+      userId: singleBlog?.userId._id,
+      categoryId: singleBlog?.categoryId,
+      title: singleBlog?.title,
+      content: singleBlog?.content,
+      image: singleBlog?.image,
+      isPublish: singleBlog?.isPublish,
+    });
+  };
+  const handleUpdateClose = () => setUpdateOpen(false);
 
   if (loading) {
     return <Loading />;
@@ -133,15 +157,32 @@ const BlogDetail = ({ params }) => {
           {fromParam === "myBlogs" && userId?._id === personalId && (
             <>
               <CardActions sx={{ justifyContent: "center", gap: 4 }}>
-                <Button variant="contained" color="success">
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={handleUpdateOpen}
+                >
                   Update
                 </Button>
-                <Button variant="contained" color="error" onClick={handleDeleteOpen}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={handleDeleteOpen}
+                >
                   Delete
                 </Button>
               </CardActions>
-              <DeleteModal open={deleteOpen} handleClose={handleDeleteClose} id={_id} />
-              <UpdateModal />
+              <DeleteModal
+                open={deleteOpen}
+                handleClose={handleDeleteClose}
+                id={_id}
+              />
+              <UpdateModal
+                open={updateOpen}
+                handleClose={handleUpdateClose}
+                info={data}
+                setInfo={setData}
+              />
             </>
           )}
         </Box>
