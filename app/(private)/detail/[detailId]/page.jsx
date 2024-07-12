@@ -17,7 +17,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import CommentBox from "./components/CommentBox";
-import Loading from "@/components/Loading";
+import Loading from "@/app/loading";
 import CommentCards from "./components/CommentCards";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@mui/material";
@@ -35,7 +35,7 @@ const BlogDetail = ({ params }) => {
   });
 
   const searchParams = useSearchParams();
-  const nameParam = searchParams.get("name");
+  const fromParam = searchParams.get("from");
 
   useEffect(() => {
     getSingleBlog(detailId);
@@ -51,9 +51,6 @@ const BlogDetail = ({ params }) => {
     title,
     userId,
   } = singleBlog;
-
-  console.log("user", userId._id)
-  console.log("personal", personalId)
 
   const LikeStyle = likes?.includes(personalId)
     ? { color: "red" }
@@ -124,7 +121,7 @@ const BlogDetail = ({ params }) => {
               ))}
             </>
           )}
-          {nameParam === "myblogs" && userId?._id === personalId && (
+          {fromParam === "myBlogs" && userId?._id === personalId && (
             <CardActions sx={{ justifyContent: "center", gap: 4 }}>
               <Button variant="contained" color="success">
                 Update

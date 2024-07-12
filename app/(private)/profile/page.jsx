@@ -1,6 +1,6 @@
 "use client";
 
-import Loading from "@/components/Loading";
+import Loading from "@/app/loading";
 import { CardMedia, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 

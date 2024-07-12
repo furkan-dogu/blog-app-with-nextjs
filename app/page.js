@@ -1,7 +1,7 @@
 "use client";
 
 import Cards from "@/components/Cards";
-import Loading from "@/components/Loading";
+import Loading from "@/app/loading";
 import Pagination from "@/components/Pagination";
 import useBlogCalls from "@/hooks/useBlogCalls";
 import { Stack } from "@mui/material";
