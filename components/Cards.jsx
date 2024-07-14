@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
 import useBlogCalls from "@/hooks/useBlogCalls";
 import { useSelector } from "react-redux";
@@ -20,8 +20,8 @@ export default function Cards({ blog }) {
   const { current } = useSelector((state) => state.blog);
 
   const LikeStyle = blog?.likes?.includes(personalId)
-    ? { color: "red" }
-    : { color: "inherit" };
+    ? { color: "red", fontSize: {xs: 16, sm: 20} }
+    : { color: "inherit", fontSize: {xs: 16, sm: 20} };
 
   const handleLike = () => {
     if (!personalId) {
@@ -32,12 +32,14 @@ export default function Cards({ blog }) {
   };
 
   return (
-    <Card sx={{ width: 345, backgroundColor:"#FFFEF9" }}>
+    <Card sx={{ width: "90%", backgroundColor:"#FFFEF9", boxShadow: 5 }}>
       <CardMedia
         component="img"
         alt={blog?.title}
-        height="140"
         image={blog?.image}
+        sx={{
+          height: {xs: 120, sm: 200, md: 280}
+        }}
       />
       <CardContent>
         <Typography
@@ -49,19 +51,19 @@ export default function Cards({ blog }) {
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
+            fontSize: {xs: 13, sm: 16, lg:24}
           }}
         >
           {blog?.title}
         </Typography>
         <Typography
-          variant="body2"
-          color="text.secondary"
+          variant="body1"
           sx={{
             overflow: "hidden",
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 3,
-            height: 60
+            fontSize: {xs: 10, sm: 12, lg:14}
           }}
         >
           {blog?.content}
@@ -69,24 +71,24 @@ export default function Cards({ blog }) {
         <hr />
         <Typography
           variant="body2"
-          color="text.secondary"
+          fontSize={{xs: 10, sm: 12, lg:14}}
         >
           Published Date: {new Date(blog?.createdAt).toLocaleString()}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
-        <Box>
+      <Stack sx={{ justifyContent: "space-between", flexDirection: {xs:"column", sm:"row"}, gap: 1, p: 1 }}>
+        <Box mt={{xs: -2, sm: 0}}>
           <IconButton onClick={handleLike}>
             <FavoriteIcon sx={LikeStyle} />
-            <Typography>{blog?.likes.length}</Typography>
+            <Typography sx={{fontSize: {xs: 16, sm: 20}}}>{blog?.likes.length}</Typography>
           </IconButton>
           <IconButton>
-            <CommentIcon />
-            <Typography>{blog?.comments.length}</Typography>
+            <CommentIcon sx={{fontSize: {xs: 16, sm: 20}}} />
+            <Typography sx={{fontSize: {xs: 16, sm: 20}}}>{blog?.comments.length}</Typography>
           </IconButton>
           <IconButton>
-            <VisibilityIcon />
-            <Typography>{blog?.countOfVisitors}</Typography>
+            <VisibilityIcon sx={{fontSize: {xs: 16, sm: 20}}} />
+            <Typography sx={{fontSize: {xs: 16, sm: 20}}}>{blog?.countOfVisitors}</Typography>
           </IconButton>
         </Box>
         <Button
@@ -94,14 +96,15 @@ export default function Cards({ blog }) {
           sx={{
             color: "turquoise",
             backgroundColor: "#0C0C0C",
-            fontSize: 12,
+            fontSize: {xs: 10, sm: 12},
+            width: {xs:"100%", sm: 120},
             "&:hover": { backgroundColor: "#0C0C0C", opacity: 0.95 },
           }}
           onClick={() => router.push(`/detail/${blog?._id}`)}
         >
           Read More
         </Button>
-      </CardActions>
+      </Stack>
     </Card>
   );
 }

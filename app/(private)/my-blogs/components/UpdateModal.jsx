@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import useBlogCalls from "@/hooks/useBlogCalls";
 import { useRouter } from "next/navigation";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
@@ -44,13 +45,11 @@ const status = [
 export default function UpdateModal({ open, handleClose, info, setInfo }) {
   const { categories } = useSelector((state) => state.blog);
   const { updateBlog } = useBlogCalls();
-  const router = useRouter()
+  const router = useRouter();
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
-
-//   console.log(info);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +68,12 @@ export default function UpdateModal({ open, handleClose, info, setInfo }) {
           gap={2}
           onSubmit={handleSubmit}
         >
+          <Box
+            sx={{ position: "absolute", right: 10, top: 10, cursor: "pointer" }}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </Box>
           <Typography variant="h4">Update Blog</Typography>
           <TextField
             id="title"
@@ -134,6 +139,7 @@ export default function UpdateModal({ open, handleClose, info, setInfo }) {
             required
             multiline
             fullWidth
+            inputProps={{ minLength: 200 }}
             rows={4}
             value={info.content}
             onChange={handleChange}

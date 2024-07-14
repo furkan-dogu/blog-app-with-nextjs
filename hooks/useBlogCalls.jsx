@@ -7,7 +7,8 @@ import {
     getBlogsSuccess, 
     getSingleBlogSuccess,
     getCategoriesSuccess,
-    getMyBlogsSuccess
+    getMyBlogsSuccess,
+    getAllBlogsSuccess
 } from "@/redux/features/blogSlice"
 import { useRouter } from "next/navigation"
 
@@ -19,7 +20,7 @@ const useBlogCalls = () => {
     const getBlogs = async (page) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosPublic.get(`/blogs?limit=3&page=${page}`)
+            const { data } = await axiosPublic.get(`/blogs?limit=4&page=${page}`)
             dispatch(getBlogsSuccess(data))
         } catch (error) {
             console.log(error)
@@ -144,6 +145,17 @@ const useBlogCalls = () => {
         }
     }
 
+    const getAllBlog = async () => {
+        dispatch(fetchStart())
+        try {
+            const { data } = await axiosWithToken.get("/blogs?limit=1000")
+            dispatch(getAllBlogsSuccess(data))
+        } catch (error) {
+            console.log(error)
+            dispatch(fetchFail())
+        }
+    }
+
     return { 
         getBlogs, 
         getSingleBlog, 
@@ -155,7 +167,8 @@ const useBlogCalls = () => {
         getCategories,
         getMyBlogs,
         deleteBlog,
-        updateBlog 
+        updateBlog,
+        getAllBlog 
     }
 }
 

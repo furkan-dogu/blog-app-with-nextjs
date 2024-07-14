@@ -141,6 +141,7 @@ const NewBlog = () => {
           required
           multiline
           fullWidth
+          inputProps={{ minLength: 200 }}
           rows={4}
           value={info.content}
           onChange={handleChange}
