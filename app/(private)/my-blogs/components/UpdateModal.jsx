@@ -63,7 +63,6 @@ export default function UpdateModal({ open, handleClose, info, setInfo }) {
         <Stack
           sx={style}
           component={"form"}
-          noValidate
           alignItems={"center"}
           gap={2}
           onSubmit={handleSubmit}

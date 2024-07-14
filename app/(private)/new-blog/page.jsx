@@ -73,7 +73,6 @@ const NewBlog = () => {
         borderRadius={3}
         p={3}
         component={"form"}
-        noValidate
         onSubmit={handleSubmit}
       >
         <Typography variant="h4">New Blog</Typography>
