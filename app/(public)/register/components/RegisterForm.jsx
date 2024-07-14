@@ -122,20 +122,6 @@ const RegisterForm = ({
           margin="normal"
           required
           fullWidth
-          id="bio"
-          label="Bio"
-          name="bio"
-          type="text"
-          value={values.bio}
-          onChange={handleChange}
-          error={touched.bio && Boolean(errors.bio)}
-          helperText={errors.bio}
-          onBlur={handleBlur}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
           name="password"
           label="Password"
           type={showPassword ? "text" : "password"}
@@ -158,6 +144,22 @@ const RegisterForm = ({
               </InputAdornment>
             ),
           }}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          multiline
+          rows={4}
+          id="bio"
+          label="Bio"
+          name="bio"
+          type="text"
+          value={values.bio}
+          onChange={handleChange}
+          error={touched.bio && Boolean(errors.bio)}
+          helperText={errors.bio}
+          onBlur={handleBlur}
         />
         <Button
           type="submit"

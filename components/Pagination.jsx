@@ -10,7 +10,7 @@ export default function PaginationControlled({ page, setPage }) {
   };
 
   return (
-    <Stack alignItems={"center"}>
+    <Stack alignItems={"center"} pb={2}>
       <Pagination count={totalPages} page={page} onChange={handleChange} />
     </Stack>
   );

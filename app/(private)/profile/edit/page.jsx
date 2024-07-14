@@ -148,6 +148,8 @@ const Edit = () => {
           <TextField
             fullWidth
             required
+            multiline
+            rows={4}
             id="bio"
             label="Bio"
             name="bio"
