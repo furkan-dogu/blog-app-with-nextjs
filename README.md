@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blog App with Nextjs
 
-## Getting Started
+<div align="center">
+  <img src="./assets/blog.gif" />
+</div>
 
-First, run the development server:
+## About the Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project I created with Nextjs contains the web version of the blog application. Users can view blog posts, create new posts, edit, delete, comment and like existing posts through this application after registering or logging in.
+
+- Email: guest@site.com
+- Password: aA?123456
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Usage](#usage)
+- [Project Skeleton](#project-skeleton)
+- [Screenshots](#screenshots)
+
+## Live Demo
+
+[Blog App with Nextjs](blog-app-with-nextjs-fd.vercel.app/)
+
+## Backend
+
+- [Live](https://blog-app-api-iota.vercel.app)
+- [Codes](https://github.com/furkan-dogu/BlogApp-API)
+
+## Features
+
+- Entry and registration procedures
+- Pagination for smooth transitions between pages.
+- Blog sections that you can add, delete and update yourself
+- View and update user information
+
+## Technologies Used
+
+- React
+- Nextjs
+- Redux
+- Redux-Toolkit
+- Axios for API requests
+- Styling with [Material UI](https://mui.com/)
+- [React-Toastify](https://fkhadra.github.io/react-toastify/introduction/) for alert 
+- [Redux-Persist](https://www.npmjs.com/package/redux-persist) for status data retention.
+- [Formik](https://formik.org/) for form management 
+- [Yup](https://www.npmjs.com/package/yup) for form validation processes
+
+## Usage
+
+- Create your registration from the Register section or log in from the login section
+- Create your own blog
+- Viewing blog posts, creating new posts, editing, deleting, commenting and liking existing posts.
+- View and update the user information you registered with the site
+
+## Project Skeleton
+
+```
+Blog App with Nextjs (folder)
+│
+├── app
+│    ├── (private)
+│    │     ├── detail 
+│    │     │     └──  [detailId]
+│    │     │           ├── components
+│    │     │           │     ├── CommentBox.jsx
+│    │     │           │     └── CommentCards.jsx
+│    │     │           └── page.jsx               
+│    │     ├── my-blogs 
+│    │     │     ├── components
+│    │     │     │     ├── DeleteModal.jsx
+│    │     │     │     ├── MyBlogsCards.jsx
+│    │     │     │     └── UpdateModal.jsx
+│    │     │     └── page.jsx 
+│    │     ├── new-blog 
+│    │     │     └── page.jsx 
+│    │     ├── profile 
+│    │     │     ├── edit
+│    │     │     │     └── page.jsx 
+│    │     │     └── page.jsx
+│    │     └── layout.jsx
+│    ├── (public)
+│    │     ├── about 
+│    │     │     └── page.jsx
+│    │     ├── login 
+│    │     │     ├── components
+│    │     │     │     └── LoginForm.jsx
+│    │     │     └── page.jsx
+│    │     └── register 
+│    │           ├── components
+│    │           │     └── RegisterForm.jsx
+│    │           └── page.jsx
+│    ├── layout.js    
+│    ├── loading.jsx    
+│    ├── not-found.jsx    
+│    └── page.js    
+├── assets
+│    └── [images]
+├── components
+│    ├── Cards.jsx
+│    ├── Footer.jsx
+│    ├── MostVisited.jsx
+│    ├── Navbar.jsx
+│    └── Pagination.jsx
+├── helpers
+│    ├── navbarLinks.js
+│    └── ToastNotify.jsx
+├── hooks
+│    ├── useAuthCalls.jsx
+│    ├── useAxios.jsx
+│    └── useBlogCalls.jsx
+├── public
+│    └── [images]
+├── redux
+│    ├──  features
+│    │      ├── authSlice.jsx
+│    │      └── blogSlice.jsx
+│    ├── provider.jsx
+│    └── store.jsx
+├── .gitignore
+├── jsconfig.json
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+<div align="center">
+  <img src="./assets/screenshots/Screenshot_1.jpg"  width="35%" height="500" />
+  <img src="./assets/screenshots/Screenshot_2.jpg"  width="55%" height="600" />
+  <img src="./assets/screenshots/Screenshot_3.jpg"  width="90.5%" height="450" />
+</div>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Compatibility
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The project is compatible with both wide-screen computers and mobile devices.

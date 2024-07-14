@@ -25,6 +25,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
+            toastErrorNotify("Blog data not available")
         }
     }
 
@@ -36,6 +37,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
+            toastErrorNotify("Blog data not available")
         }
     }
 
@@ -47,7 +49,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Like işlemi başarısız")
+            toastErrorNotify("Like failed")
         }
     }
 
@@ -59,7 +61,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Comment işlemi başarısız")
+            toastErrorNotify("Comment operation failed")
         }
     }
 
@@ -71,7 +73,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Comment silme işlemi başarısız")
+            toastErrorNotify("Comment deletion failed")
         }
     }
 
@@ -83,7 +85,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Comment edit işlemi başarısız")
+            toastErrorNotify("Comment edit failed")
         }
     }
 
@@ -95,7 +97,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Blog oluşturma işlemi başarısız")
+            toastErrorNotify("Blog creation process failed")
         }
     }
 
@@ -118,7 +120,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("My Blogs işlemi başarısız")
+            toastErrorNotify("The process to pull my blog data failed")
         }
     }
 
@@ -130,7 +132,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Blog silme işlemi başarısız")
+            toastErrorNotify("Blog deletion failed")
         }
     }
 
@@ -141,7 +143,7 @@ const useBlogCalls = () => {
         } catch (error) {
             console.log(error)
             dispatch(fetchFail())
-            toastErrorNotify("Blog edit işlemi başarısız")
+            toastErrorNotify("Blog edit failed")
         }
     }
 
