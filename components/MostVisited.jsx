@@ -55,7 +55,7 @@ const MostVisited = () => {
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{fontSize: {xs: 8, sm: 10, lg:14}}}>
-              Visitors: {countOfVisitors}
+              {countOfVisitors} views
             </Typography>
             <Typography variant="body2" color="text.secondary"  sx={{fontSize: {xs: 8, sm: 10, lg:14}}}>
               {new Date(createdAt).toLocaleDateString()}
