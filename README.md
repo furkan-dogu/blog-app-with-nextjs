@@ -21,7 +21,7 @@ This project I created with Nextjs contains the web version of the blog applicat
 
 ## Live Demo
 
-[Blog App with Nextjs](blog-app-with-nextjs-fd.vercel.app/)
+[Blog App with Nextjs](https://blog-app-with-nextjs-fd.vercel.app/)
 
 ## Backend
 
