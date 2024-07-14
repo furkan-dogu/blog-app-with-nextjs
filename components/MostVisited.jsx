@@ -37,7 +37,7 @@ const MostVisited = () => {
             alt={title}
             image={image}
             sx={{
-              maxWidth: 280,
+              height: "50%",
               borderRadius: 2,
             }}
           />

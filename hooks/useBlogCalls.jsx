@@ -20,7 +20,7 @@ const useBlogCalls = () => {
     const getBlogs = async (page) => {
         dispatch(fetchStart())
         try {
-            const { data } = await axiosPublic.get(`/blogs?limit=4&page=${page}`)
+            const { data } = await axiosPublic.get(`/blogs?limit=5&page=${page}`)
             dispatch(getBlogsSuccess(data))
         } catch (error) {
             console.log(error)
